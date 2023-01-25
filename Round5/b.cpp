@@ -9,22 +9,15 @@ int main () {
     while (n--) {
         int a,b,c,d;
         cin >> a >> b >> c >> d;
-        int cap = a+b+c+d;
-        int res = a;
-        if (a > 0) {
-            int tmp = min(b,c);
-            res += 2*tmp;
-            b -= tmp;
-            c -= tmp;
+        if (a == 0) cout << 1 << endl;
+        else {
+            // 先找出bc中最小的，减去对应的值
+            int t = min(b,c);
+            b -= t;
+            c -= t;
+            if (b+c > a) cout << 2*a + 2*t + 1 << endl;
+            else cout << a+2*t+b+c+min(d,a-b-c+1) << endl;
         }
-
-        b = min(b,a);
-        c = min(c,a);
-        res += b+c;
-
-        d = min(d,min(a-b,a-c));
-        res += d;
-        cout << min(res+1,cap) << endl;
     }
     return 0;
 }
